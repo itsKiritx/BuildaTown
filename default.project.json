@@ -1,0 +1,45 @@
+{
+	"name": "Build a Town",
+	"tree": {
+		"$className": "DataModel",
+
+		"ReplicatedFirst": {
+			"$className": "ReplicatedFirst",
+			"Scripts": {
+				"$className": "Folder",
+				"$path": "src/ReplicatedFirst"
+			}
+		},
+
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"Scripts": {
+				"$className": "Folder",
+				"$path": "src/ReplicatedStorage"
+			}
+		},
+
+		"StarterPlayer": {
+			"$className": "StarterPlayer",
+			"$ignoreUnknownInstances": true,
+
+			"StarterPlayerScripts": {
+				"$className": "StarterPlayerScripts",
+				"$path": "src/StarterPlayer/StarterPlayerScripts"
+			},
+
+			"StarterCharacterScripts": {
+				"$className": "StarterCharacterScripts",
+				"$path": "src/StarterPlayer/StarterCharacterScripts"
+			}
+		},
+
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"Scripts": {
+				"$className": "Folder",
+				"$path": "src/ServerScriptService"
+			}
+		}
+	}
+}
