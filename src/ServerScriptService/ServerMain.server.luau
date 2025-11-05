@@ -1,1 +1,1 @@
-print("Rojo Server")
+print("Rojo Server!")
