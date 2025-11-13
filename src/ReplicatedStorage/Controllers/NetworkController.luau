@@ -109,9 +109,7 @@ end
 Packets.Init()
 
 function NetworkController:FeatherStart()
-	NetworkController:FireServer("TellServerToPrint", {
-		Message = "Hello, World!"
-	})
+	
 end
 
 return Feather.WrapController(NetworkController, script)

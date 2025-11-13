@@ -1,9 +1,11 @@
+local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 
 local Feather = require(ReplicatedStorage.Scripts.Packages.Feather)
 local ProfileStore = require(ServerScriptService.Scripts.Library.ProfileStore)
+local NetworkService = require(ServerScriptService.Scripts.Services.NetworkService)
 
 local PlayerStore
 local DataService = {
@@ -12,7 +14,7 @@ local DataService = {
 	ProfileTemplate = {
 		CurrentSlot = 1,
 
-		Money = 0,
+		Money = 500,
 		Gems = 0,
 		Likes = 0,
 		Liked = {},
@@ -91,7 +93,6 @@ function DataService:GetPlayerData(Player: Player, Slot: number?)
 		end
 	end
 
-	warn(`Retrieved data for player {Player.Name} in slot {Slot}`)
 	return Data
 end
 
@@ -118,6 +119,13 @@ function DataService:FeatherStart()
 		if profile ~= nil then
 			profile:EndSession()
 		end
+	end)
+
+	NetworkService.OnServerInvoke("FetchData", function(Data, Player)
+		warn("Fetching data for player:", Player.Name, "Slot:", Data.Slot)
+		local PlayerData = self:GetPlayerData(Player, Data.Slot)
+		warn("Sending Player Data:", PlayerData)
+		return {Data = HttpService:JSONEncode(PlayerData or {})}
 	end)
 end
 

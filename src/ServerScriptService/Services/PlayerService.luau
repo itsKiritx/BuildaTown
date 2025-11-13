@@ -16,6 +16,7 @@ local function PlayerAdded(Player: Player)
 
 	local Backpack = Player:WaitForChild("Backpack")
 	Player:SetAttribute("Money", PlayerData.Money)
+	Player:SetAttribute("Gems", PlayerData.Gems)
 
 	local function CharacterAdded(Character)
 		local Root = Character:WaitForChild("HumanoidRootPart")

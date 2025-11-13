@@ -1,7 +1,5 @@
 --!strict
 
-print("Rojo Client!")
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Feather = require(ReplicatedStorage.Scripts.Packages.Feather)

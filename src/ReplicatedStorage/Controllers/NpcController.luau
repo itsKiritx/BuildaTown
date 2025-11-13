@@ -31,10 +31,11 @@ function NpcController:SetupShopNPC()
 		Label.Visible = true
 
 		UtilComponent:BubblyText(Label, `Welcome to my shop {Player.DisplayName or Player.Name}! Take a look around.`, {
-			TextScaled = true
+			TextScaled = true,
+			TypeSpeed = 0.01
 		})
 
-		task.wait(2)
+		task.wait(1)
 		UIController:ShowShop()
 
 		repeat
@@ -42,7 +43,8 @@ function NpcController:SetupShopNPC()
 		until not ShopUI.Visible
 
 		UtilComponent:BubblyText(Label, "Thanks for stopping by! Come again soon!", {
-			TextScaled = true
+			TextScaled = true,
+			TypeSpeed = 0.01
 		})
 
 		task.wait(2)

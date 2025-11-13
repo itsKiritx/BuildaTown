@@ -24,4 +24,7 @@ return {
 	Entities = GetOrCreateFolder("Entities", World),
 	NPCs = GetOrCreateFolder("NPCs", World),
 	Plots = GetOrCreateFolder("Plots", World),
+	BuildPreview = GetOrCreateFolder("BuildPreview", World),
+	Debris = GetOrCreateFolder("Debris", World),
+	UI = GetOrCreateFolder("UI", World),
 }

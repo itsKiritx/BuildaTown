@@ -1,7 +1,5 @@
 --!strict
 
-print("Rojo Server!")
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ServerScriptService = game:GetService("ServerScriptService")
 

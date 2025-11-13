@@ -1,5 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
 
 local Feather = require(ReplicatedStorage.Scripts.Packages.Feather)
 local Containers = require(ReplicatedStorage.Scripts.Packages.Containers)
@@ -67,6 +68,38 @@ function UtilComponent:TableCount(Table)
 	end
 
 	return Count
+end
+
+function UtilComponent:CircularProgress(UI, CurrentTime, TotalTime)
+	local LeftHalf = UI.Left.Circle
+	local RightHalf = UI.Right.Circle
+	local TimeText = UI.Center.Time
+
+	local Percentage = Instance.new("NumberValue")
+
+	local function Update()
+		local Rotation = math.clamp(Percentage.Value * 3.6, 0, 360)
+		local TimePassed = math.floor(TotalTime * (Percentage.Value / 100))
+		local TimeLeft = TotalTime - TimePassed
+
+		local hours = math.floor(TimeLeft / 3600)
+		local minutes = math.floor((TimeLeft % 3600) / 60)
+		local seconds = TimeLeft % 60
+		TimeText.Text = hours > 0 and string.format("%02d:%02d:%02d", hours, minutes, seconds) or string.format("%02d:%02d", minutes, seconds)
+
+		RightHalf.UIGradient.Rotation = math.clamp(Rotation, 0, 180)
+		LeftHalf.UIGradient.Rotation = math.clamp(Rotation, 180, 360)
+	end
+
+	Percentage:GetPropertyChangedSignal("Value"):Connect(function()
+		Update()
+	end)
+
+	Percentage.Value = (CurrentTime or 0) / (TotalTime or 1) * 100
+	Update()
+	local Tween = TweenService:Create(Percentage, TweenInfo.new(math.max(TotalTime - (CurrentTime or 0), 0), Enum.EasingStyle.Linear), {Value = 100})
+	Tween:Play()
+	return Tween
 end
 
 function UtilComponent:BubblyText(TextLabel: TextLabel, Text: string, Settings: table?)
